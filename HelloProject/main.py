@@ -1,4 +1,5 @@
 from flask import Flask
+import datetime         # for getting the current time
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -7,9 +8,10 @@ app.config['DEBUG'] = True
 
 
 @app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+def getTime():
+    """Return the current date and time"""
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    return 'The current date and time is: ', current_time
 
 
 @app.errorhandler(404)
