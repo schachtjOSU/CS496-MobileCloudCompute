@@ -9,10 +9,6 @@ class MainHandler(webapp2.RedirectHandler):
         self.response.write('This is the current time: ')
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
 ], debug=True)
 
-#@app.errorhandler(404)
-#def page_not_found(e):
-#    """Return a custom 404 error."""
-#    return 'Sorry, nothing at this URL.', 404
