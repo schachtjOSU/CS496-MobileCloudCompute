@@ -1,14 +1,16 @@
 import webapp2
-#import datetime         # for getting the current time
+import datetime
 
-class MainHandler(webapp2.RedirectHandler):
-    def getTime(self):
-        """Return the current date and time"""
-        #current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-        #self.response.write('This is the current time: ', current_time)
-        self.response.write('This is the current time: ')
+class MainPage(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.out.write("Welcome to Jeffrey Schachtsick's first Hello App")
+        self.response.out.write('\n')
+        the_time = datetime.datetime.now().strftime("%m-%d-%Y %H:%M")
+        self.response.out.write('This is the current date and time: ')
+        self.response.out.write(the_time)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
+    ('/', MainPage),
 ], debug=True)
 
