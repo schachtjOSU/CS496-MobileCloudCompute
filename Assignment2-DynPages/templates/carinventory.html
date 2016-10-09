@@ -1,0 +1,77 @@
+<!-- Author: Jeffrey Schachtsick -->
+<!-- CS 496 - Mobile/Cloud Development -->
+<!-- Assignment 2: Dynamic Pages -->
+<!-- Car Inventory site -->
+<!-- Last update: 10/2/2016 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Car Inventory</title>
+</head>
+<body>
+    <h1>Car Inventory</h1>
+    <p> By Jeffrey Schachtsick</p>
+    <!-- Form for adding cars -->
+    <form action="/backend" method="post">
+        <fieldset>
+            <legend>Add Car</legend>
+            <input type="hidden" name="action" value="add_car">
+            <p>Make selections below to add car to inventory:</p>
+            <!-- Inputs text for car brand, make and year -->
+            <b>Brand/Make/Year</b>
+            <input type="text" name="car-brand" placeholder="Brand">
+            <input type="text" name="car-make" placeholder="Make">
+            <input type="text" name="car-year" placeholder="Year (YYYY)"></br>
+            <!-- Inputs radio for type of auto -->
+            <b>Select a type: </b>
+            <input type="radio" name="car-type" value="sedan">Sedan
+            <input type="radio" name="car-type" value="suv">SUV
+            <input type="radio" name="car-type" value="pickup">Pickup
+            <input type="radio" name="car-type" value="tank">Tank</br>
+            <!-- Inputs checkbox for special car equipment -->
+            <b>Something Special</b>
+            <input type="checkbox" name="car-special" value="leather">Leather Interior
+            <input type="checkbox" name="car-special" value="4x4">4x4
+            <input type="checkbox" name="car-special" value="moonroof">Moon Roof
+            <input type="checkbox" name="car-special" value="turbo">Turbo Engine</br>
+            <!-- Input range for the condition of the car -->
+            <b>Car's condition:</b></br>
+            Terrible<input type="range" name="condition" min="1" max="10">Awesome</br>
+            <!-- Submit add of car -->
+            <input type="submit" value="Add">
+        </fieldset>
+    </form>
+    <form action="/" method="post">
+    {% if cars|length > 0 %}
+        <fieldset>
+            <legend>Edit Car</legend>
+            <b>Select a car:</b>
+            {% for c in cars %}
+            <a href='/edit?key={{ c.key }}&type=cars'>{{ c.name }}</a>
+            <!--<input type="radio" name="cars[]" value="{{ c.key }}"><label> {{ c.name }}</label>-->
+            {% endfor %}
+            <br>
+            <!-- <input type="submit" value="Edit"> -->
+        </fieldset>
+    {% endif %}
+    </form>
+    {% if cars|length > 0 %}
+    <fieldset>
+        <legend>Available Cars</legend>
+        <b>Click car to view car detials</b></br>
+        <!-- Jinja form handler add here to dynamically add cars  -->
+        {% for c in cars %}
+            <a href='/view?key={{ c.key }}&type=cars'>{{ c.name }}</a>
+        {% endfor %}
+    </fieldset>
+    {% endif %}
+    {% if message %}
+    <section>
+        <h3>Result</h3>
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
+</body>
+</html>

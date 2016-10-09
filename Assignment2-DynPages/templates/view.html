@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Car</title>
+</head>
+<body>
+    <b>Car Details</b>
+    {% if car %}
+        <br>
+            Brand: {{ car.brand }} </br>
+            Make: {{ car.make }}  </br>
+            Year: {{ car.year }}  </br>
+            Type: {{ car.ctype }}  </br>
+            Condition: {{ car.condition }}  </br>
+            Special Features: {{ car.special }}  </br>
+        </section>
+    {% endif %}
+    <p><a href='/backend'>Home Page</a></p>
+</body>
+</html>

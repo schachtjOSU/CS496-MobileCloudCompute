@@ -1,0 +1,59 @@
+<!-- Author: Jeffrey Schachtsick -->
+<!-- CS 496 - Mobile/Cloud Development -->
+<!-- Assignment 2: Dynamic Pages -->
+<!-- Car Inventory site -->
+<!-- Last update: 10/2/2016 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Car</title>
+</head>
+<body>
+    <h1>Edit Car</h1>
+    {% if car %}
+    <form action="{{ edit_url }}" method="post" >
+        <input type="hidden" name="action" value="edit_car">
+        <b>Brand/Make/Year</b>
+        <input type="text" name="car-brand" value="{{ car.brand }}">
+        <input type="text" name="car-make" value="{{ car.make }}">
+        <input type="text" name="car-year" value="{{ car.year }}"> </br>
+        <!-- Inputs radio for type of auto -->
+        <b>Select a type: </b>
+        <input type="radio" name="car-type" value="sedan" {% if car.ctype == sedan %} checked="checked" {% endif %}>Sedan
+        <input type="radio" name="car-type" value="suv">SUV
+        <input type="radio" name="car-type" value="pickup">Pickup
+        <input type="radio" name="car-type" value="tank" {% if car.ctype == tank %} checked="checked" {% endif %}>Tank</br>
+        <!-- Inputs checkbox for special car equipment -->
+        <b>Something Special</b>
+        <input type="checkbox" name="car-special" value="leather">Leather Interior
+        <input type="checkbox" name="car-special" value="4x4">4x4
+        <input type="checkbox" name="car-special" value="moonroof">Moon Roof
+        <input type="checkbox" name="car-special" value="turbo">Turbo Engine</br>
+        <b>Car's condition:</b></br>
+        Terrible<input type="range" name="condition" min="1" max="10" value="{{ car.condition }}">Awesome</br>
+        <input type="submit" value="Edit">
+    </form>
+    {% endif %}
+    <!--<form action="{{ edit_url }}" method="POST" >
+        {% if classes|length > 0 %}
+        <fieldset>
+            <legend>Associated Classes</legend>
+            {% for c in classes %}
+            <label> {{ c.name }} </label>
+            <input type="checkbox" name="classes[]" value="{{ c.key }}" {% if c.checked %}checked="{{ c.checked }}" {% endif %}>
+            {% endfor %}
+        </fieldset>
+        {% endif %}
+        <input type="submit" value="Update">
+    </form> -->
+    {% if message %}
+    <section>
+        <h3>Result</h3>
+        <p>{{ message }}</p>
+    </section>
+    {% endif %}
+    <p><a href='/backend'>Home Page</a></p>
+</body>
+</html>
